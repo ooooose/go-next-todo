@@ -1,0 +1,25 @@
+services:
+  db:
+    container_name: todo-db
+    image: 'mysql:8.2.0'
+    volumes:
+      - mysql_db_data:/var/lib/mysql
+    env_file:
+      - ./back/env/db.env
+
+  api:
+    container_name: todo-api
+    build: ./back
+    volumes: 
+      - type: bind
+        source: ./back/app
+        target: /app
+    ports:
+      - 5050:5050
+    env_file:
+      - ./back/env/api.env
+    depends_on:
+      - db
+
+volumes:
+  mysql_db_data:

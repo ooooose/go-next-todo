@@ -1,0 +1,61 @@
+# アプリのルート
+root = "."
+# ビルド結果の保管場所
+tmp_dir = "tmp"
+
+[build]
+cmd = "go build -o ./tmp/main ./main.go"
+bin = "tmp/main"
+# 検知の対象とする拡張子
+include_ext = ["go", "tpl", "tmpl", "html"]
+# 検知の対象外とするファイル
+exclude_file = []
+# 検知の対象外とするディレクトリ
+exclude_dir = ["assets", "tmp"]
+# 検知の対象外とする拡張子
+exclude_regex = ["_test\\.go"]
+# 変更されていないファイルに対するリロード有無
+exclude_unchanged = true
+# 参照先のファイルが変更された際のリロード有無
+follow_symlink = true
+# tmp_dirに配置されるビルド結果のログファイル
+log = "air.log"
+# fsnotifyを使わずにポーリングによる変更検知を行うか否か(Windows環境の場合はtrueにする必要あり。)
+poll = false
+# ポーリング時のインターバル(ms)
+poll_interval = 0
+# ファイル変更検知からビルドまでの遅延(ms)
+delay = 0
+# ファイル監視イベントの処理中にエラーが発生した場合、監視を止めるか否か
+stop_on_error = true
+# プロセスを修了する前にシグナルを送信するか否か
+send_interrupt = false
+# 実行中のアプリのダウンタイム
+kill_delay = 500 # nanosecond
+# 再実行の設定
+rerun = false
+# 再実行時の遅延(ms)
+rerun_delay = 500
+
+[log]
+# ログへの時刻出力有無
+time = false
+# メインのみのログ設定
+main_only = false
+
+[color]
+# ログのカラー設定
+main = "magenta"
+watcher = "cyan"
+build = "yellow"
+runner = "green"
+
+[misc]
+# 終了時にビルド先のディレクトリを削除するか否か
+clean_on_exit = true
+
+[screen]
+# リビルド時のクリア設定
+clear_on_rebuild = true
+# 自動スクロール設定
+keep_scroll = true
