@@ -20,6 +20,20 @@ services:
       - ./back/env/api.env
     depends_on:
       - db
+    tty: true
+    stdin_open: true
+
+  front:
+    build: 
+      context: ./front/
+      dockerfile: Dockerfile
+    volumes:
+      - './front:/user/src/app'
+    command: sh -c "npm run dev"
+    ports:
+      - 3000:3000
+    tty: true
+    stdin_open: true
 
 volumes:
   mysql_db_data:
