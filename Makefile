@@ -12,3 +12,6 @@ logs:
 
 shell:
 	docker compose run --rm back bash
+
+ps:
+	docker compose ps -a
