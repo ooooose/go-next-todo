@@ -7,4 +7,7 @@ import (
 func RegisterRoutes(server *echo.Echo) {
 	server.GET("/tasks", GetAllTasks)
 	server.GET("/tasks/:id", GetTaskById)
+	server.POST("/tasks", CreateTask)
+	server.PUT("/tasks", UpdateTask)
+	server.DELETE("/tasks/:id", DeleteTask)
 }

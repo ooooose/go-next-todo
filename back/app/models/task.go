@@ -32,3 +32,27 @@ func GetTaskById(id string) (*Task, error) {
 
 	return &task, nil
 }
+
+func CreateTask(task Task) error {
+	if db.DB.Create(&task).Error != nil {
+		return echo.ErrInternalServerError
+	}
+
+	return nil
+}
+
+func UpdateTask(task Task) error {
+	if db.DB.Save(&task).Error != nil {
+		return echo.ErrInternalServerError
+	}
+
+	return nil
+}
+
+func DeleteTask(id string) error {
+	if db.DB.Delete(&Task{}, id).Error != nil {
+		return echo.ErrInternalServerError
+	}
+
+	return nil
+}
