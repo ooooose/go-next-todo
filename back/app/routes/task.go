@@ -3,6 +3,7 @@ package routes
 import (
 	"net/http"
 	"todo/models"
+	"todo/db"
 
 	"github.com/labstack/echo/v4"
 )
@@ -27,7 +28,7 @@ func GetTaskById(context echo.Context) error {
 }
 
 func CreateTask(context echo.Context) error {
-	task := models.Task{}
+	task := db.Task{}
 	if err := context.Bind(&task); err != nil {
 		return context.JSON(http.StatusInternalServerError, "タスクを作成できませんでした。")
 	}
@@ -40,7 +41,7 @@ func CreateTask(context echo.Context) error {
 }
 
 func UpdateTask(context echo.Context) error {
-	task := models.Task{}
+	task := db.Task{}
 	if err := context.Bind(&task); err != nil {
 		return context.JSON(http.StatusInternalServerError, "タスクを更新できませんでした。")
 	}

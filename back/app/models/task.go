@@ -2,21 +2,12 @@ package models
 
 import (
 	"todo/db"
-	"time"
 
 	"github.com/labstack/echo/v4"
 )
 
-type Task struct {
-	ID        string      `json:"id" mysql:"id"`
-	Name      string    `json:"name" mysql:"name"`
-	IsDone    bool      `json:"is_done" mysql:"is_done"`
-	UpdateAt  time.Time `json:"update_at" mysql:"update_at"`
-	CreatedAt time.Time `json:"created_at" mysql:"created_at"`
-}
-
-func GetAllTasks() ([]Task, error) {
-	tasks := []Task{}
+func GetAllTasks() ([]db.Task, error) {
+	tasks := []db.Task{}
 	if db.DB.Find(&tasks).Error !=nil {
 		return nil, echo.ErrNotFound
 	}
@@ -24,8 +15,8 @@ func GetAllTasks() ([]Task, error) {
 	return tasks, nil
 }
 
-func GetTaskById(id string) (*Task, error) {
-	task := Task{}
+func GetTaskById(id string) (*db.Task, error) {
+	task := db.Task{}
 	if db.DB.Where("id = ?", id).First(&task).Error != nil {
 		return nil, echo.ErrNotFound
 	}
@@ -33,7 +24,7 @@ func GetTaskById(id string) (*Task, error) {
 	return &task, nil
 }
 
-func CreateTask(task Task) error {
+func CreateTask(task db.Task) error {
 	if db.DB.Create(&task).Error != nil {
 		return echo.ErrInternalServerError
 	}
@@ -41,7 +32,7 @@ func CreateTask(task Task) error {
 	return nil
 }
 
-func UpdateTask(task Task) error {
+func UpdateTask(task db.Task) error {
 	if db.DB.Save(&task).Error != nil {
 		return echo.ErrInternalServerError
 	}
@@ -50,7 +41,7 @@ func UpdateTask(task Task) error {
 }
 
 func DeleteTask(id string) error {
-	if db.DB.Delete(&Task{}, id).Error != nil {
+	if db.DB.Delete(&db.Task{}, id).Error != nil {
 		return echo.ErrInternalServerError
 	}
 
