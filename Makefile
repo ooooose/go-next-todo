@@ -8,10 +8,10 @@ down:
 	docker compose down
 
 logs:
-	docker compose lots -f back
+	docker compose logs api
 
 shell:
-	docker compose run --rm back bash
+	docker compose run --rm api sh
 
 ps:
 	docker compose ps -a
