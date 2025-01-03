@@ -3,7 +3,9 @@ package routes
 import (
 	"net/http"
 	"todo/models"
+	"todo/db"
 
+	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
 )
 
@@ -27,10 +29,12 @@ func GetTaskById(context echo.Context) error {
 }
 
 func CreateTask(context echo.Context) error {
-	task := models.Task{}
+	task := db.Task{}
 	if err := context.Bind(&task); err != nil {
 		return context.JSON(http.StatusInternalServerError, "タスクを作成できませんでした。")
 	}
+
+	task.ID = uuid.New().String()
 
 	if err := models.CreateTask(task); err != nil {
 		return context.JSON(http.StatusInternalServerError, "タスクを作成できませんでした。")
@@ -40,7 +44,7 @@ func CreateTask(context echo.Context) error {
 }
 
 func UpdateTask(context echo.Context) error {
-	task := models.Task{}
+	task := db.Task{}
 	if err := context.Bind(&task); err != nil {
 		return context.JSON(http.StatusInternalServerError, "タスクを更新できませんでした。")
 	}
@@ -54,6 +58,11 @@ func UpdateTask(context echo.Context) error {
 
 func DeleteTask(context echo.Context) error {
 	id := context.Param("id")
+
+	if _, err := uuid.Parse(id); err != nil {
+		return context.JSON(http.StatusBadRequest, "IDが不正です。")
+	}
+
 	if err := models.DeleteTask(id); err != nil {
 		return context.JSON(http.StatusInternalServerError, "タスクを削除できませんでした。")
 	}

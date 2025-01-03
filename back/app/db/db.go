@@ -4,11 +4,20 @@ import (
 	"fmt"
 	"os"
 
+	"time"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
 var DB *gorm.DB
+
+type Task struct {
+	ID        string        `json:"id" mysql:"id" gorm:"primaryKey"`
+	Name      string      `json:"name" mysql:"name" gorm:"not null"`
+	IsDone    bool        `json:"is_done" mysql:"is_done" gorm:"default:false"`
+	CreatedAt time.Time   `json:"created_at" mysql:"created_at"`
+	UpdatedAt time.Time   `json:"updated_at" mysql:"updated_at"`
+}
 
 func Init() {
 	dbUser := os.Getenv("DB_USER")
@@ -28,4 +37,6 @@ func Init() {
 	if err != nil {
 		panic("Could not connect to the database")
 	}
+
+	DB.AutoMigrate(&Task{})
 }
