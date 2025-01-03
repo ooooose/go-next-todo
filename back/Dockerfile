@@ -5,13 +5,11 @@ ENV TZ /usr/share/zoneinfo/Asia/Tokyo
 
 WORKDIR /app
 
-COPY ./app/* /app/
+COPY ./app/ /app/
 
 RUN go mod download
 
 RUN go install github.com/cosmtrek/air@v1.27.3
-
-RUN air init -d /app
 
 EXPOSE 5050
 
