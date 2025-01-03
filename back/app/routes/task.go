@@ -5,6 +5,7 @@ import (
 	"todo/models"
 	"todo/db"
 
+	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
 )
 
@@ -32,6 +33,8 @@ func CreateTask(context echo.Context) error {
 	if err := context.Bind(&task); err != nil {
 		return context.JSON(http.StatusInternalServerError, "タスクを作成できませんでした。")
 	}
+
+	task.ID = uuid.New().String()
 
 	if err := models.CreateTask(task); err != nil {
 		return context.JSON(http.StatusInternalServerError, "タスクを作成できませんでした。")

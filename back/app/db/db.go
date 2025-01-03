@@ -12,11 +12,11 @@ import (
 var DB *gorm.DB
 
 type Task struct {
-	ID        string      `json:"id" mysql:"id"`
-	Name      string      `json:"name" mysql:"name"`
-	IsDone    bool        `json:"is_done" mysql:"is_done"`
+	ID        string        `json:"id" mysql:"id" gorm:"primaryKey"`
+	Name      string      `json:"name" mysql:"name" gorm:"not null"`
+	IsDone    bool        `json:"is_done" mysql:"is_done" gorm:"default:false"`
 	CreatedAt time.Time   `json:"created_at" mysql:"created_at"`
-	UpdatedAt  time.Time  `json:"updated_at" mysql:"updated_at"`
+	UpdatedAt time.Time   `json:"updated_at" mysql:"updated_at"`
 }
 
 func Init() {
