@@ -58,6 +58,11 @@ func UpdateTask(context echo.Context) error {
 
 func DeleteTask(context echo.Context) error {
 	id := context.Param("id")
+
+	if _, err := uuid.Parse(id); err != nil {
+		return context.JSON(http.StatusBadRequest, "IDが不正です。")
+	}
+
 	if err := models.DeleteTask(id); err != nil {
 		return context.JSON(http.StatusInternalServerError, "タスクを削除できませんでした。")
 	}

@@ -41,7 +41,7 @@ func UpdateTask(task db.Task) error {
 }
 
 func DeleteTask(id string) error {
-	if db.DB.Delete(&db.Task{}, id).Error != nil {
+	if db.DB.Delete(&db.Task{}, "id = ?", id).Error != nil {
 		return echo.ErrInternalServerError
 	}
 

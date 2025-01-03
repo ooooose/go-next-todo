@@ -8,7 +8,7 @@ down:
 	docker compose down
 
 logs:
-	docker compose logs api
+	docker compose logs api -f
 
 shell:
 	docker compose run --rm api sh
