@@ -1,5 +1,3 @@
-
-
 class Api {
   baseUrl: string;
 
@@ -14,7 +12,7 @@ class Api {
     }
   }
 
-  private async request(url: string, options: RequestInit): Promise<Response> {
+  private async request<T>(url: string, options: RequestInit): Promise<T> {
     try {
       const headers = await this.getHeaders()
       const response = await fetch(`${this.baseUrl}${url}`, { ...options, headers })
@@ -29,20 +27,20 @@ class Api {
     }
   }
 
-  async get(url: string, ) {
-    return this.request(url, { method: 'GET' })
+  async get<T>(url: string): Promise<T> {
+    return this.request<T>(url, { method: 'GET' })
   }
 
-  async post(url: string, body = {}) {
-    return this.request(url, { method: 'POST', body: JSON.stringify(body) })
+  async post<T>(url: string, body = {}): Promise<T> {
+    return this.request<T>(url, { method: 'POST', body: JSON.stringify(body) })
   }
 
-  async put(url: string, body = {}) {
-    return this.request(url, { method: 'PUT', body: JSON.stringify(body) })
+  async put<T>(url: string, body = {}): Promise<T> {
+    return this.request<T>(url, { method: 'PUT', body: JSON.stringify(body) })
   }
 
-  async delete(url: string) {
-    return this.request(url, { method: 'DELETE' })
+  async delete<T>(url: string): Promise<T> {
+    return this.request<T>(url, { method: 'DELETE' })
   }
 }
 

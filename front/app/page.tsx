@@ -1,9 +1,12 @@
 import { MainLayout } from "@/components/layouts/main-layout";
+import { getTasks } from "@/features/tasks/api";
+import { TaskList } from "@/features/tasks/components/task-list";
 
-export default function Home() {
+export default async function Home() {
+  const tasks = await getTasks()
   return (
     <MainLayout>
-      <h1>Home</h1>
+      <TaskList tasks={tasks} />
     </MainLayout>
   );
 }
