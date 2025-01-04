@@ -67,5 +67,5 @@ func DeleteTask(context echo.Context) error {
 		return context.JSON(http.StatusInternalServerError, "タスクを削除できませんでした。")
 	}
 
-	return context.NoContent(http.StatusNoContent)
+	return context.JSON(http.StatusOK, "タスクを削除しました。")
 }
