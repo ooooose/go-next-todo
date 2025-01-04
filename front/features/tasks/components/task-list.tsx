@@ -1,11 +1,23 @@
+'use client'
+
+import { useState, useEffect } from "react";
+
 import { Task } from "../type"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
+import { getTasks } from "../api";
 
-type TaskListProps = {
-  tasks: Task[];
-}
 
-export const TaskList = ({ tasks }: TaskListProps) => {
+export const TaskList = () => {
+  const [tasks, setTasks] = useState<Task[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getTasks();
+      setTasks(data);
+    };
+    fetchData();
+  }, []);
+
   return (
     <div>
       {
