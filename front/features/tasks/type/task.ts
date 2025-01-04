@@ -1,8 +1,7 @@
 export type Task = {
   id: string;
-  title: string;
-  description: string;
-  status: "todo" | "doing" | "done";
+  name: string;
+  isDone: boolean;
   createdAt: string;
   updatedAt: string;
 }
