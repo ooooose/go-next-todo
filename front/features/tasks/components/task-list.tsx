@@ -3,8 +3,10 @@
 import { useState, useEffect } from "react";
 
 import { Task } from "../type"
-import { Button } from "@/components/ui/button";
+
+import { Task as TaskComponent } from "./task";
 import { getTasks } from "../api";
+import { CreateTask } from "./create-task";
 
 
 export const TaskList = () => {
@@ -20,17 +22,14 @@ export const TaskList = () => {
 
   return (
     <div>
-      {
-        tasks.map(task => (
-          <div className="flex" key={task.id}>
-            <div>
-              <p>{task.name}</p>
-              <p>{task.isDone ? "完了" : "未完了"}</p>
-            </div>
-            <Button>削除</Button>
-          </div>
-        ))
-      }
+      <CreateTask setTasks={setTasks} />
+      <div className="py-5">
+        {
+          tasks.map((task, index) => (
+            <TaskComponent key={task.id} index={index} task={task} setTasks={setTasks} />
+          ))
+        }
+      </div>
     </div>
   )
 }
