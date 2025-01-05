@@ -7,7 +7,7 @@ resource "aws_route_table" "route_table" {
   }
 
   tags = {
-    Name = "${var.environment}-route-table"
+    Name = "todo-route-table"
   }
 }
 
