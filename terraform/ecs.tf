@@ -3,7 +3,7 @@ locals {
   service_name = "todo-service"
   region = "ap-northeast-1"
   ecr_name = "todo-with-terraform-api"
-  ecr_image = "todo-with-terraform-api" # This is the same as ecr_image
+  ecr_image = "${var.aws_account_id}.dkr.ecr.ap-northeast-1.amazonaws.com/todo-with-terraform-api:latest"
   ecs_task_role = aws_iam_role.ecs_task_role.name
   ecs_task_cpu = 256
   ecs_task_memory = 512

@@ -1,7 +1,7 @@
 FROM golang:1.23.4-alpine3.21
 RUN apk update && apk add git
 
-ENV TZ /usr/share/zoneinfo/Asia/Tokyo
+ENV TZ=/usr/share/zoneinfo/Asia/Tokyo
 
 WORKDIR /app
 
