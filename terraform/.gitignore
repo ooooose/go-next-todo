@@ -4,3 +4,6 @@
 
 # .tfvarsファイル - Terraformの変数ファイル
 *.tfvars
+
+# .terraformディレクトリ - Terraformのキャッシュディレクトリ
+.terraform/*
