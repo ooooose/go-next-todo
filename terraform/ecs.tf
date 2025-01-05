@@ -4,7 +4,7 @@ locals {
   region = "ap-northeast-1"
   ecr_name = "todo-with-terraform-api"
   ecr_image = "${var.aws_account_id}.dkr.ecr.ap-northeast-1.amazonaws.com/todo-with-terraform-api:latest"
-  ecs_task_role = aws_iam_role.ecs_task_role.name
+  ecs_task_role = aws_iam_role.ecs_task_execution_role.arn
   ecs_task_cpu = 256
   ecs_task_memory = 512
   ecs_service_desired_count = 2
@@ -15,7 +15,7 @@ resource "aws_ecs_cluster" "cluster" {
 }
 
 resource "aws_ecs_cluster_capacity_providers" "cluster_capacity_providers" {
-  cluster = aws_ecs_cluster.cluster.id
+  cluster_name = aws_ecs_cluster.cluster.name
   capacity_providers = ["FARGATE"]
   default_capacity_provider_strategy {
     capacity_provider = "FARGATE"
@@ -30,7 +30,7 @@ resource "aws_ecs_task_definition" "task_definition" {
   cpu = local.ecs_task_cpu
   memory = local.ecs_task_memory
   network_mode = "awsvpc"
-  execution_role_arn = local.ecs_task_execution_role
+  execution_role_arn = local.ecs_task_role
   task_role_arn = local.ecs_task_role
   container_definitions = jsonencode([
     {

@@ -1,6 +1,6 @@
 locals {
   alb_name = "alb"
-  alb_tg_name = "alb_tg"
+  alb_tg_name = "alb-tg"
 }
 
 resource "aws_lb" "alb" {
