@@ -21,15 +21,16 @@ export const TaskList = () => {
   }, []);
 
   return (
-    <div>
+    <div className="w-full">
+      <h1 className="text-2xl font-bold text-white mb-8">
+        TODOアプリ
+      </h1>
       <CreateTask setTasks={setTasks} />
-      <div className="py-5">
-        {
-          tasks.map((task, index) => (
-            <TaskComponent key={task.id} index={index} task={task} setTasks={setTasks} />
-          ))
-        }
-      </div>
+      {
+        tasks.map((task, index) => (
+          <TaskComponent key={task.id} index={index} task={task} tasks={tasks} setTasks={setTasks} />
+        ))
+      }
     </div>
   )
 }

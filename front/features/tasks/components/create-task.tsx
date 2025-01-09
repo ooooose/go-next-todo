@@ -3,6 +3,7 @@ import { createTask, getTasks } from "../api"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Task } from "../type"
+import { Plus } from "lucide-react"
 
 type CreateTaskProps = {
   setTasks: Dispatch<SetStateAction<Task[]>>
@@ -20,9 +21,19 @@ export const CreateTask = ({ setTasks }: CreateTaskProps) => {
   }
 
   return (
-    <div className="flex gap-2">
-      <Input value={name} onChange={(e) => setName(e.target.value)} />
-      <Button onClick={handleCreateTask} disabled={name === ""}>作成</Button>
+    <div className="">
+      <div className="flex gap-2 mx-auto">
+        <Input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="新しいタスクを入力"
+          className="w-36"
+        />
+        <Button onClick={handleCreateTask} size="icon" disabled={name === ""} className="px-4">
+          <Plus className="size-4" /> 作成
+        </Button>
+      </div>
     </div>
   )
 }
