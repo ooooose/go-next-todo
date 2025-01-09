@@ -1,0 +1,9 @@
+# .tfstateファイル - Terraformの状態ファイル
+*.tfstate
+*.tfstate.*
+
+# .tfvarsファイル - Terraformの変数ファイル
+*.tfvars
+
+# .terraformディレクトリ - Terraformのキャッシュディレクトリ
+.terraform/*
