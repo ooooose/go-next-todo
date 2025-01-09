@@ -25,9 +25,9 @@ resource "aws_security_group" "alb_sg" {
 }
 
 resource "aws_security_group" "ecs_sg" {
-  name = local.ecs_sg_name
+  name        = local.ecs_sg_name
   description = "Security group for ECS instances"
-  vpc_id = aws_vpc.vpc.id
+  vpc_id      = aws_vpc.vpc.id
 
   ingress {
     from_port   = 0
@@ -45,9 +45,9 @@ resource "aws_security_group" "ecs_sg" {
 }
 
 resource "aws_security_group" "ecr_vpce_sg" {
-  name = local.ecr_vpce_sg
+  name        = local.ecr_vpce_sg
   description = "Security group for ECR VPC Endpoint"
-  vpc_id = aws_vpc.vpc.id
+  vpc_id      = aws_vpc.vpc.id
 
   ingress {
     from_port   = 443
