@@ -21,8 +21,8 @@ export const CreateTask = ({ setTasks }: CreateTaskProps) => {
   }
 
   return (
-    <div className="">
-      <div className="flex gap-2 mx-auto">
+    <div className="flex justify-center">
+      <div className="flex gap-2">
         <Input
           type="text"
           value={name}
@@ -30,8 +30,12 @@ export const CreateTask = ({ setTasks }: CreateTaskProps) => {
           placeholder="新しいタスクを入力"
           className="w-36"
         />
-        <Button onClick={handleCreateTask} size="icon" disabled={name === ""} className="px-4">
-          <Plus className="size-4" /> 作成
+        <Button
+          onClick={handleCreateTask}
+          disabled={name === ""}
+        >
+          <Plus className="mr-2 size-4" />
+          作成
         </Button>
       </div>
     </div>
