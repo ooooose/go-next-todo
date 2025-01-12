@@ -2,8 +2,8 @@ locals {
   cluster_name              = "todo-cluster"
   service_name              = "todo-service"
   region                    = "ap-northeast-1"
-  ecr_name                  = "todo-with-terraform-api"
-  ecr_image                 = "${var.aws_account_id}.dkr.ecr.ap-northeast-1.amazonaws.com/todo-with-terraform-api:latest"
+  ecr_name                  = "todo-with-terraform"
+  ecr_image                 = "${var.aws_account_id}.dkr.ecr.ap-northeast-1.amazonaws.com/todo-with-terraform:latest"
   ecs_task_role             = aws_iam_role.ecs_task_execution_role.arn
   ecs_task_cpu              = 256
   ecs_task_memory           = 512
