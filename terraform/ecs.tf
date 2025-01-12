@@ -52,7 +52,7 @@ resource "aws_ecs_task_definition" "task_definition" {
         },
         {
           name  = "DB_PORT"
-          value = aws_db_instance.db.port
+          value = tostring(aws_db_instance.db.port)
         },
         {
           name  = "DB_USER"
