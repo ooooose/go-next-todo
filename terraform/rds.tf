@@ -1,12 +1,12 @@
 resource "aws_db_instance" "db" {
-  allocated_storage      = 20
+  allocated_storage      = 10
   storage_type           = "gp2"
-  engine                 = "mysql"
-  engine_version         = "8.2"
-  instance_class         = "db.t2.micro"
+  engine                 = var.rds_engine
+  engine_version         = var.rds_engine_version
+  instance_class         = var.rds_instance_class
+  identifier             = var.rds_db_name
   username               = var.rds_username
   password               = var.rds_password
-  parameter_group_name   = "default.mysql8.2"
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
   db_subnet_group_name   = aws_db_subnet_group.rds.name
   tags = {
