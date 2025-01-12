@@ -83,3 +83,12 @@ resource "aws_security_group" "rds_sg" {
     cidr_blocks = [aws_vpc.vpc.cidr_block]
   }
 }
+
+resource "aws_security_group_rule" "allow_ecs_to_rds" {
+  type        = "ingress"
+  from_port   = 3306
+  to_port     = 3306
+  protocol    = "tcp"
+  security_group_id        = aws_security_group.rds_sg.id
+  source_security_group_id = aws_security_group.ecs_sg.id
+}

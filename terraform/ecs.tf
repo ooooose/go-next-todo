@@ -45,6 +45,28 @@ resource "aws_ecs_task_definition" "task_definition" {
           hostPort      = 5050
         }
       ]
+      environment = [
+        {
+          name  = "DB_HOST"
+          value = aws_db_instance.db.address
+        },
+        {
+          name  = "DB_PORT"
+          value = aws_db_instance.db.port
+        },
+        {
+          name  = "DB_USER"
+          value = aws_db_instance.db.username
+        },
+        {
+          name  = "DB_PASSWORD"
+          value = aws_db_instance.db.password
+        },
+        {
+          name  = "DB_NAME"
+          value = aws_db_instance.db.identifier
+        }
+      ]
     }
   ])
 
