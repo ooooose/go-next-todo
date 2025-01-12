@@ -1,4 +1,5 @@
-FROM golang:1.23.4-alpine3.21
+FROM golang:1.20-alpine
+
 RUN apk update && apk add git
 
 ENV TZ=/usr/share/zoneinfo/Asia/Tokyo
