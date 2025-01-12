@@ -25,9 +25,9 @@ resource "aws_security_group" "alb_sg" {
 }
 
 resource "aws_security_group" "ecs_sg" {
-  name = local.ecs_sg_name
+  name        = local.ecs_sg_name
   description = "Security group for ECS instances"
-  vpc_id = aws_vpc.vpc.id
+  vpc_id      = aws_vpc.vpc.id
 
   ingress {
     from_port   = 0
@@ -45,9 +45,9 @@ resource "aws_security_group" "ecs_sg" {
 }
 
 resource "aws_security_group" "ecr_vpce_sg" {
-  name = local.ecr_vpce_sg
+  name        = local.ecr_vpce_sg
   description = "Security group for ECR VPC Endpoint"
-  vpc_id = aws_vpc.vpc.id
+  vpc_id      = aws_vpc.vpc.id
 
   ingress {
     from_port   = 443
@@ -62,4 +62,33 @@ resource "aws_security_group" "ecr_vpce_sg" {
     to_port     = 0
     cidr_blocks = [aws_vpc.vpc.cidr_block]
   }
+}
+
+resource "aws_security_group" "rds_sg" {
+  name        = "rds_sg"
+  description = "Security group for RDS"
+  vpc_id      = aws_vpc.vpc.id
+
+  ingress {
+    from_port   = 3306
+    to_port     = 3306
+    protocol    = "tcp"
+    cidr_blocks = [aws_vpc.vpc.cidr_block]
+  }
+
+  egress {
+    protocol    = "-1"
+    from_port   = 0
+    to_port     = 0
+    cidr_blocks = [aws_vpc.vpc.cidr_block]
+  }
+}
+
+resource "aws_security_group_rule" "allow_ecs_to_rds" {
+  type                     = "ingress"
+  from_port                = 3306
+  to_port                  = 3306
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.rds_sg.id
+  source_security_group_id = aws_security_group.ecs_sg.id
 }
