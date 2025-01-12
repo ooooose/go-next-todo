@@ -27,3 +27,18 @@ variable "private_subnet_cidr_block_1c" {
   description = "Private Subnet CIDR Block for Availability Zone 1c"
   type        = string
 }
+
+variable "rds_username" {
+  description = "RDS Username"
+  type        = string
+}
+
+variable "rds_password" {
+  description = "RDS Password"
+  type        = string
+}
+
+variable "rds_db_name" {
+  description = "RDS Database Name"
+  type        = string
+}
