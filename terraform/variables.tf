@@ -13,12 +13,17 @@ variable "vpc_cidr_block" {
   type        = string
 }
 
-variable "subnet_cidr_block_1a" {
-  description = "Subnet CIDR Block for Availability Zone 1a"
+variable "public_subnet_cidr_block_1a" {
+  description = "Public Subnet CIDR Block for Availability Zone 1a"
   type        = string
 }
 
-variable "subnet_cidr_block_1c" {
-  description = "Subnet CIDR Block for Availability Zone 1c"
+variable "public_subnet_cidr_block_1c" {
+  description = "Public Subnet CIDR Block for Availability Zone 1c"
+  type        = string
+}
+
+variable "private_subnet_cidr_block_1c" {
+  description = "Private Subnet CIDR Block for Availability Zone 1c"
   type        = string
 }

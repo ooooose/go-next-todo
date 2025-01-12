@@ -21,7 +21,7 @@ resource "aws_vpc_endpoint" "ecr_api" {
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = true
   security_group_ids  = [aws_security_group.ecr_vpce_sg.id]
-  subnet_ids          = [aws_subnet.subnet_1a.id, aws_subnet.subnet_1c.id]
+  subnet_ids          = [aws_subnet.public_subnet_1a.id, aws_subnet.public_subnet_1c.id]
 
   tags = {
     Name = "todo-ecr-api-vpce"
@@ -34,7 +34,7 @@ resource "aws_vpc_endpoint" "ecr_dkr" {
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = true
   security_group_ids  = [aws_security_group.ecr_vpce_sg.id]
-  subnet_ids          = [aws_subnet.subnet_1a.id, aws_subnet.subnet_1c.id]
+  subnet_ids          = [aws_subnet.public_subnet_1a.id, aws_subnet.public_subnet_1c.id]
 
   tags = {
     Name = "todo-ecr-dkr-vpce"

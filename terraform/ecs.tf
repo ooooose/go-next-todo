@@ -67,7 +67,7 @@ resource "aws_ecs_service" "todo_service" {
   }
 
   network_configuration {
-    subnets          = [aws_subnet.subnet_1a.id, aws_subnet.subnet_1c.id]
+    subnets          = [aws_subnet.public_subnet_1a.id, aws_subnet.public_subnet_1c.id]
     security_groups  = [aws_security_group.ecs_sg.id]
     assign_public_ip = true
   }
